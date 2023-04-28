@@ -1,4 +1,7 @@
-; Autor: David Pizarro
+; Tarea 1
+; https://replit.com/@LUISJERONIMO2/Tarea1
+; https://github.com/Megver83/scheme-workshop
+; Integrantes: David Pizarro, Luis Jeronimo, Felipe Gallardo, Daniel Olivares
 
 ; Defino "suma" para utilizar en el ejercicio 18 y 13
 (define (suma lst)
