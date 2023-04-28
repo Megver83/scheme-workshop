@@ -182,13 +182,7 @@
 
 (define (filt-fact lista)
     (letrec ((factoriales '(6 24 120 720 5040 40320 362880 3628800))
-        (presente (lambda(x lst)
-            (cond
-                ((null? lst) #f)
-                ((= (car lst) x) #t)
-                (else (presente x (cdr lst)))
-            ))
-        ))
+        (presente (lambda(x lst) (not (not (member x lst))))))
         (filter (lambda(n) (presente n factoriales)) lista)
     )
 )
