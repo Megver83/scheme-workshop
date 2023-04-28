@@ -29,9 +29,7 @@
 
 ; 2. Haga una función que devuelva el número negativo de cada número de una lista.
 
-(define (neg-nums lista)
-    (map (lambda(x) (- x)) lista)
-)
+(define (neg-nums lista) (map (lambda(x) (- x)) lista))
 
 (display "Ejecución ejercicio 2: ")
 (display (neg-nums '(1 2 3)))
@@ -155,18 +153,21 @@
 
 ; 9. Haga una función que retorne una lista con los primeros N números primos.
 
-(define (agregar-primo n lista)
-    (if (es-primo? n)
-        (append lista (list n))
-        lista
-    )
-)
-
 (define (generar-primos cant)
-    (letrec ((iterar (lambda (n lista)
-        (if (= (length lista) cant)
-            lista
-            (iterar (+ n 1) (agregar-primo n lista))))))
+    (letrec (
+        (agregar-primo (lambda(n lista)
+            (if (es-primo? n)
+                (append lista (list n))
+                lista
+            ))
+        )
+        (iterar (lambda(n lista)
+            (if (= (length lista) cant)
+                lista
+                (iterar (+ n 1) (agregar-primo n lista))
+            )))
+        )
+        ; inicializa en el 2, el primer número primo
         (iterar 2 '())
     )
 )
@@ -180,8 +181,15 @@
 ; NOTA: El profesor me dijo en clase que era retornar una lista de los que son factoriales de 3 a 10
 
 (define (filt-fact lista)
-    (let ((factoriales '(6, 24, 120, 720, 5040, 40320, 362880, 3628800)))
-        (filter (lambda (x) (member x factoriales)) lista)
+    (letrec ((factoriales '(6 24 120 720 5040 40320 362880 3628800))
+        (presente (lambda(x lst)
+            (cond
+                ((null? lst) #f)
+                ((= (car lst) x) #t)
+                (else (presente x (cdr lst)))
+            ))
+        ))
+        (filter (lambda(n) (presente n factoriales)) lista)
     )
 )
 
@@ -206,22 +214,7 @@
 ; 13. Haga una función que calcule un promedio de notas a partir de una lista (Todas las notas con
 ;     la misma ponderación).
 
-(define (media lista)
-    (letrec
-        (
-;;             (suma (lambda (lst)
-;;                 (cond
-;;                     ((null? lst) 0)
-;;                     ((not (pair? lst)) (car lst))
-;;                     (else (+ (car lst) (suma (cdr lst))))
-;;                 ))
-;;             )
-            (n (length lista))
-        )
-        (/ (suma lista) n)
-    )
-)
-
+(define (media lista) (/ (suma lista) (length lista)))
 
 (display "Ejecución ejercicio 13: ")
 (display (media '(1 2 3)))
