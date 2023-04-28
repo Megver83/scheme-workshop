@@ -102,9 +102,8 @@
         )
         )))
         (cond
-            ((and (> potencia 0) (integer? potencia)) (multi-n-veces potencia))
+            ((or (and (> potencia 0) (integer? potencia)) (= potencia 0)) (multi-n-veces potencia))
             ((and (< potencia 0) (integer? potencia)) (/ 1 (multi-n-veces (- potencia))))
-            ((and (= potencia 0)) (multi-n-veces potencia))
             (else "Argumentos invalidos, revisa que pusiste como base y/o potencia")
         )
     )
