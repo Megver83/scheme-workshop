@@ -116,9 +116,7 @@
 ; 7. Haga una función que reciba una lista de números, y que retorne una lista con esos números
 ;    multiplicados por 2.
 
-(define (doble lista)
-    (map (lambda(x) (* x 2)) lista)
-)
+(define (doble lista) (map (lambda(x) (* x 2)) lista))
 
 (display "Ejecución ejercicio 7: ")
 (display (doble '(1 2 3)))
@@ -144,10 +142,9 @@
 
 (define (es-primo? n)
     (and (> n 1)
-        (letrec ((iterar (lambda (i)
-            (or (= i n)
-                (and (not (= (modulo n i) 0))
-                    (iterar (+ i 1)))))))
+        (letrec ((iterar (lambda(i)
+            (or (= i n) (and (not (= (modulo n i) 0)) (iterar (+ i 1)))))))
+            ; inicializa en el 2, el primer número primo
             (iterar 2)
         )
     )
@@ -182,12 +179,7 @@
 ;     (2!), 6 (3!), 24 (4!), etc) de una lista. Ejemplo: ‘(1 2 3 4 5 6) -> ‘(3 4 5)
 ; NOTA: El profesor me dijo en clase que era retornar una lista de los que son factoriales de 3 a 10
 
-(define (filt-fact lista)
-    (letrec ((factoriales '(6 24 120 720 5040 40320 362880 3628800))
-        (presente (lambda(x lst) (not (not (member x lst))))))
-        (filter (lambda(n) (presente n factoriales)) lista)
-    )
-)
+(define (filt-fact lista) (filter (lambda(x) (not (not (member x '(6 24 120 720 5040 40320 362880 3628800))))) lista))
 
 (display "Ejecución ejercicio 10: ")
 (display (filt-fact '(1 120 2 3 24 4 5 6 7)))
@@ -275,9 +267,7 @@
 
 ; 18. Haga una función que sume los números que son impares de una lista.
 
-(define (suma-impares lst)
-    (suma (filter (lambda(x) (not (even? x))) lst))
-)
+(define (suma-impares lst) (suma (filter (lambda(x) (not (even? x))) lst)))
 
 (display "Ejecución ejercicio 18: ")
 (display (suma-impares '(1 2 3 4 5 6)))
