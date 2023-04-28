@@ -66,7 +66,7 @@
 
 ; (string-length "string")
 (define (longitud cadena)
-    (if (string=? cadena "")
+    (if (equal? cadena "")
         0
         (+ 1 (longitud (substring cadena 1)))
     )
