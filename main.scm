@@ -205,7 +205,7 @@
           ((odd? (car lista)) (iterarlist (cdr lista) (+ suma (car lista))))
           (else (iterarlist (cdr lista) suma))))
   (iterarlist lista 0))
-; NOTA: las definiciones anidadas son, generalmente, una mala práctica, es mejor usar let para crear lambdas, eso hice a continuacion con suma-impares. ~David
+; NOTA: las definiciones anidadas son, generalmente, una mala práctica, es mejor usar let o letrec para crear lambdas, como en anteriores funciones. ~David
 
 (define (suma-impares lst)
     ; "suma" lo definí en el ejercicio 13
